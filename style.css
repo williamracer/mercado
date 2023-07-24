@@ -1,0 +1,110 @@
+/* Estilizando a tabela para ocupar 100% da largura do contêiner e adicionando aparência zebrada */
+.mdl-data-table {
+  top: 50%;
+  transform: translate(0, -8%);
+  width: 100%;
+}
+
+.mdl-data-table tbody tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+/* Ajustando o espaçamento interno dos ícones na tabela */
+.mdl-data-table .mdl-button--icon {
+  margin: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  line-height: 36px;
+}
+
+/* Centralizando os ícones da tabela */
+.mdl-data-table .mdl-button--icon i {
+  display: block;
+  text-align: center;
+}
+/* Estilizando a tabela para ocupar 100% da largura do contêiner e adicionando aparência zebrada */
+.mdl-data-table {
+  width: 100%;
+}
+
+.mdl-data-table tbody tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+/* Ajustando o espaçamento interno dos ícones na tabela */
+.mdl-data-table .mdl-button--icon {
+  margin: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  line-height: 36px;
+}
+
+/* Centralizando os ícones da tabela */
+.mdl-data-table .mdl-button--icon i {
+  display: block;
+  text-align: center;
+}
+/* Estilos personalizados */
+
+/* Limitar o tamanho da página a 900px em telas maiores que 1200px */
+@media screen and (min-width: 1200px) {
+  .mdl-layout__content {
+      max-width: 900px;
+      margin: 0 auto;
+  }
+
+  .mdl-textfield {
+      width: calc(33.33% - 16px);
+      margin-right: 16px;
+  }
+
+  .mdl-grid {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .total-geral-containe{
+    top: 50%;
+    left: 30%;
+  }
+
+  .mdl-data-table {
+    top: 25%;
+  }
+}
+
+/* Formatar a primeira letra dos itens na tabela para maiúscula */
+.mdl-data-table th,
+.mdl-data-table td {
+  text-transform: capitalize;
+}
+
+/* Outros estilos */
+
+.total-geral-container {
+  position: fixed;
+  top: 5%;
+  left: 60%;
+  transform: translate(-10%, -50%);
+  z-index: 1;
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+/* Mais estilos se necessário */
+
+.mdl-grid{
+  position: fixed;
+  width: 100%;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  z-index: 10;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

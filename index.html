@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <title>Meu Site de Cadastro</title>
+    <!-- Importando os arquivos CSS e JS do Material Design Lite através do CDN -->
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!-- Importando a biblioteca de ícones do Material Design -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Adicionando estilos personalizados -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+        <main class="mdl-layout__content">
+            <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--12-col-tablet mdl-cell--8-col-desktop">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="item" oninput="verificarItemExistente()">
+                        <label class="mdl-textfield__label" for="item">Item</label>
+                        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="item">
+                            <li class="mdl-menu__item" onclick="selecionarItemSugerido()"></li>
+                        </ul>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="number" id="preco" step="0.01">
+                        <label class="mdl-textfield__label" for="preco">Preço Unitário (R$)</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="number" id="quantidade" min="1" step="1">
+                        <label class="mdl-textfield__label" for="quantidade">Quantidade</label>
+                    </div>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="adicionarItem()">
+                        Adicionar
+                    </button>
+                </div>
+            </div>
+            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" id="tabela">
+                <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">
+                            <button class="mdl-button mdl-js-button" onclick="ordenarItens('item')">Item</button>
+                        </th>
+                        <th>
+                            <button class="mdl-button mdl-js-button" onclick="ordenarItens('preco')">Preço Unitário (R$)</button>
+                        </th>
+                        <th>
+                            <button class="mdl-button mdl-js-button" onclick="ordenarItens('quantidade')">Quantidade</button>
+                        </th>
+                        <th>
+                            <button class="mdl-button mdl-js-button" onclick="ordenarItens('total')">Total (R$)</button>
+                        </th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- As linhas da tabela serão geradas dinamicamente -->
+                </tbody>
+            </table>
+        </main>
+        <div class="total-geral-container mdl-layout__header-row">
+            <span id="total-geral">Total Geral: R$ 0,00</span>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
