@@ -1,0 +1,200 @@
+/* Reset de estilos padrão */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos do corpo do documento */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #fafafa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Estilos do botão de menu */
+#toggle-sidebar {
+  background-color: #1976D2;
+  color: #fff;
+  font-size: 2.4rem;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  top: 2%;
+  right: 25%;
+  transform: translateX(50%);
+  box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  padding: 10px;
+  border-radius: 50%;
+}
+@media (max-width: 600px) {
+  #toggle-sidebar {
+    top: 2%;
+    right: 8%;
+  }
+}
+
+/* Estilos da barra lateral (painel de cadastro) */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 600px;
+  color: #E1F5FE;
+  background-color: #182f3bea;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 500;
+}
+
+#sidebar.show-sidebar {
+  transform: translateX(0);
+}
+
+#sidebar h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+#item-form label {
+  display: block;
+  margin-bottom: 5px;
+  text-shadow: 2px 2px 6px #000000;
+}
+
+#item-form input {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#item-form button {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+#item-form button:hover {
+  background-color: #45a049;
+}
+
+#total {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-bottom: 2%;
+  background-color: #0c2c35;
+  color: white;
+  font-size: x-large;
+  font-weight: bold;
+  text-shadow: 0 2px 4px #0b151a;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+#ttl {
+  color: #83d0e3;
+  font-size: small;
+}
+
+/* Estilos da tabela */
+#content {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+}
+
+#table-container {
+  max-height: 90vh;
+  overflow: auto;
+}
+
+#item-list {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+#item-list th,
+#item-list td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#item-list th {
+  position: sticky;
+  top: 0;
+  background-color: #f9f9f9;
+}
+
+#item-list th:hover {
+  cursor: ns-resize;
+}
+
+#item-list th .sort-icons {
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+}
+
+#item-list th:hover .sort-icons {
+  display: flex;
+  flex-direction: column;
+}
+
+#item-list th .sort-icons span {
+  cursor: pointer;
+  color: #555;
+}
+
+#item-list tr:nth-child(even) {
+  background-color: #E1F5FE;
+}
+
+#item-list tr:hover {
+  background-color: #B3E5FC;
+}
+
+/* Estilos dos botões de ação */
+.action-buttons {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-right: 10px;
+  color: #1976D2;
+}
+
+/* Estilos dos ícones */
+.material-icons,
+.material-icons-outlined {
+  font-family: 'Material Icons', sans-serif;
+}
+
+.material-icons-outlined {
+  font-family: 'Material Icons Outlined', sans-serif;
+}
+
+#save-as-pdf {
+  position: absolute;
+  right: 1%;
+  bottom: 1%;
+}
