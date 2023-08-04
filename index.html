@@ -76,8 +76,14 @@
     </div>
     <div class="bts_inf">
       <div class="bts_svs">
-        <button id="pdfButton" class="material-icons" onclick="generatePDF()">save_alt</button>
-        <button id="csvButton" class="material-icons" onclick="generateCSV()">description</button>
+        <div class="bt_legnd">
+          <button id="pdfButton" class="material-icons" onclick="generatePDF()">description</button>
+          <span class="legend_svs-bts">Salvar em PDF</span>
+        </div>
+        <div class="bt_legnd">
+          <button id="csvButton" class="material-icons" onclick="generateCSV()">save_alt</button>
+          <span class="legend_svs-bts">Salvar Dados</span>
+        </div>
       </div>
   <!-- Adicione este input file para permitir ao usuário selecionar o arquivo CSV -->
   <div class="upload_csv">
