@@ -42,7 +42,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  max-width: 540px;
+  max-width: 520px;
   color: #E1F5FE;
   background-color: #182f3bea;
   border-radius: 0 0 16px 16px;
@@ -193,8 +193,18 @@ body {
   font-family: 'Material Icons Outlined', sans-serif;
 }
 
-#save-as-pdf {
-  position: absolute;
-  right: 1%;
-  bottom: 1%;
+#pdfButton {
+  position: relative;
+  background-color: #1976D2;
+  color: #fff;
+  padding: 0.5%;
+  border-radius: 30%;
+}
+
+#csvButton {
+  position: relative;
+  background-color: #1976D2;
+  color: #fff;
+  padding: 0.5%;
+  border-radius: 30%;
 }
