@@ -170,42 +170,63 @@ function removeItem() {
 // ... Código JavaScript anterior ...
 
 // Função para salvar a tabela como PDF
-function saveAsPDF() {
-  // Certifique-se de que a biblioteca jsPDF está disponível
-  if (typeof jsPDF !== "undefined") {
-    const doc = new jsPDF();
-    const columns = ["Item", "Preço", "Qtd", "Subtotal"];
-    const data = [];
-    const total = calculateTotal();
+function generatePDF() {
+  const element = document.getElementById("table-container");
+  const totalElement = document.getElementById("total");
+  const total = totalElement.textContent;
 
-    for (const item of itemsData) {
-      const subtotal = item.price * item.quantity;
-      data.push([item.name, `R$ ${item.price.toFixed(2)}`, item.quantity, `R$ ${subtotal.toFixed(2)}`]);
-    }
+  const opt = {
+    margin: 10,
+    filename: 'conteudo.pdf',
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
 
-    data.unshift(["", "", "Total:", `R$ ${total.toFixed(2)}`]);
+  const pdfContent = `
+    <h2>Lista de Compras</h2>
+    ${element.innerHTML}
+    <div>${total}</div>
+  `;
 
-    doc.autoTable({
-      head: [columns],
-      body: data,
-      startY: 20,
-      theme: "grid",
-    });
-
-    doc.save("lista_de_compras.pdf");
-  } else {
-    alert("A biblioteca jsPDF não foi carregada corretamente. Verifique a importação do script no HTML.");
-  }
+  html2pdf().set(opt).from(pdfContent).save();
 }
 
 // ... Resto do código JavaScript ...
+// Função para salvar CSV
 
+function generateCSV() {
+  const items = itemsData.map(item => [item.name, item.price, item.quantity, (item.price * item.quantity).toFixed(2)]);
+  const csvContent = "data:text/csv;charset=utf-8," + items.map(e => e.join(",")).join("\n");
+  const encodedUri = encodeURI(csvContent);
+  const link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", "conteudo.csv");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+// Resto do código
 
 document.querySelector("#item-form").addEventListener("submit", addItem);
 document.querySelector("#toggle-sidebar").addEventListener("click", function() {
   document.querySelector("#sidebar").classList.toggle("show-sidebar");
 });
 
+// Ordenar itens
+
+function sortItems(columnName) {
+  if (currentSortColumn === columnName) {
+    currentSortDirection = currentSortDirection === "asc" ? "desc" : "asc";
+  } else {
+    currentSortColumn = columnName;
+    currentSortDirection = "asc";
+  }
+
+  updateTable();
+}
+
+// Resto do código
 const sortableColumns = document.querySelectorAll("[data-column]");
 sortableColumns.forEach(column => {
   column.addEventListener("click", () => {
@@ -213,8 +234,5 @@ sortableColumns.forEach(column => {
     sortItems(columnName);
   });
 });
-
-document.querySelector("#save-as-pdf").addEventListener("click", saveAsPDF);
-
 updateTable();
 updateTotal();
