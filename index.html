@@ -8,6 +8,38 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+
+<!-- Adicione este novo elemento para o painel de edição -->
+<div id="edit-panel" class="hidden">
+  <h2>Editar Item</h2>
+  <div class="mdc-text-field">
+    <input type="text" id="edit-item-name" class="mdc-text-field__input">
+    <label class="mdc-floating-label" for="edit-item-name">Item</label>
+    <div class="mdc-line-ripple"></div>
+  </div>
+  <div class="mdc-text-field">
+    <input type="number" step="0.01" id="edit-item-price" class="mdc-text-field__input">
+    <label class="mdc-floating-label" for="edit-item-price">Preço Unitário</label>
+    <div class="mdc-line-ripple"></div>
+  </div>
+  <div class="mdc-text-field">
+    <input type="number" step="0.01" id="edit-item-quantity" class="mdc-text-field__input">
+    <label class="mdc-floating-label" for="edit-item-quantity">Quantidade</label>
+    <div class="mdc-line-ripple"></div>
+  </div>
+  <div class="mdc-button">
+    <button id="bt_edt" class="material-icons" type="submit" onclick="saveEditedItem()">
+      <span class="material-icons">save</span> Salvar
+    </button>
+    <button id="bt_edt" class="material-icons" onclick="deleteItem()">
+      <span class="material-icons">delete</span> Apagar
+    </button>
+    <button id="bt_edt" class="material-icons" onclick="closeEditPanel()">
+      <span class="material-icons">disabled_by_default</span> Cancelar
+    </button>
+  </div>
+</div>
+
   <button id="toggle-sidebar" class="material-icons">menu</button>
   <div id="sidebar">
     <div id="total">
@@ -20,7 +52,7 @@
       <label for="item-price">Preço Unitário:</label>
       <input type="number" id="item-price" step="0.01" required><br>
       <label for="item-quantity">Quantidade:</label>
-      <input type="number" id="item-quantity" step="0.01" required><br>
+      <input type="number" id="item-quantity" step="1" required><br>
       <button type="submit">ADICIONAR</button>
     </form>
   </div>
@@ -45,6 +77,13 @@
     <button id="pdfButton" class="material-icons" onclick="generatePDF()">save_alt</button>
     <button id="csvButton" class="material-icons" onclick="generateCSV()">description</button>
 
+  <!-- Adicione este input file para permitir ao usuário selecionar o arquivo CSV -->
+<input type="file" id="csvFileInput" accept=".csv">
+
+<!-- Adicione um novo botão para acionar a leitura do arquivo CSV -->
+<button id="loadCSVButton" class="material-icons" onclick="loadCSV()">cloud_upload</button>
+
+  
     <script src="scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
   </div>
