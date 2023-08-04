@@ -74,15 +74,19 @@
         </tbody>
       </table>
     </div>
-    <button id="pdfButton" class="material-icons" onclick="generatePDF()">save_alt</button>
-    <button id="csvButton" class="material-icons" onclick="generateCSV()">description</button>
-
+    <div class="bts_inf">
+      <div class="bts_svs">
+        <button id="pdfButton" class="material-icons" onclick="generatePDF()">save_alt</button>
+        <button id="csvButton" class="material-icons" onclick="generateCSV()">description</button>
+      </div>
   <!-- Adicione este input file para permitir ao usuário selecionar o arquivo CSV -->
-<input type="file" id="csvFileInput" accept=".csv">
+  <div class="upload_csv">
+    <input type="file" id="csvFileInput" accept=".csv">
 
-<!-- Adicione um novo botão para acionar a leitura do arquivo CSV -->
-<button id="loadCSVButton" class="material-icons" onclick="loadCSV()">cloud_upload</button>
-
+    <!-- Adicione um novo botão para acionar a leitura do arquivo CSV -->
+    <button id="loadCSVButton" class="material-icons" onclick="loadCSV()">cloud_upload</button>
+  </div>
+</div>
   
     <script src="scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
