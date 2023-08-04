@@ -121,17 +121,41 @@ function editItem(index) {
   const item = itemsData[index];
   editingItemIndex = index;
   editingItemData = { name: item.name, price: item.price, quantity: item.quantity };
-  updateTable();
+
+  // Preencher os campos de edição no painel de edição
+  const editNameInput = document.querySelector("#edit-item-name");
+  const editPriceInput = document.querySelector("#edit-item-price");
+  const editQuantityInput = document.querySelector("#edit-item-quantity");
+
+  editNameInput.value = editingItemData.name;
+  editPriceInput.value = editingItemData.price.toFixed(2);
+  editQuantityInput.value = editingItemData.quantity;
+
+  // Exibir o painel de edição
+  const editPanel = document.getElementById("edit-panel");
+  editPanel.classList.remove("hidden");
 }
 
-// Função para salvar um item editado
+function closeEditPanel() {
+  // Limpar os campos de edição e ocultar o painel de edição
+  const editNameInput = document.querySelector("#edit-item-name");
+  const editPriceInput = document.querySelector("#edit-item-price");
+  const editQuantityInput = document.querySelector("#edit-item-quantity");
+
+  editNameInput.value = "";
+  editPriceInput.value = "";
+  editQuantityInput.value = "";
+
+  const editPanel = document.getElementById("edit-panel");
+  editPanel.classList.add("hidden");
+}
+
 function saveEditedItem() {
-  const newName = document.querySelector("#edit-item-name-" + editingItemIndex).value.trim();
-  const newPrice = parseFloat(document.querySelector("#edit-item-price-" + editingItemIndex).value);
-  const newQuantity = parseFloat(document.querySelector("#edit-item-quantity-" + editingItemIndex).value);
+  const newName = document.querySelector("#edit-item-name").value.trim();
+  const newPrice = parseFloat(document.querySelector("#edit-item-price").value);
+  const newQuantity = parseFloat(document.querySelector("#edit-item-quantity").value);
 
   if (newName && !isNaN(newPrice) && !isNaN(newQuantity)) {
-    // Verificar se o novo nome já existe (ignorando o caso - maiúsculas ou minúsculas)
     const existingItemIndex = itemsData.findIndex(
       (item, index) => index !== editingItemIndex && item.name.toLowerCase() === newName.toLowerCase()
     );
@@ -139,34 +163,54 @@ function saveEditedItem() {
       const existingItem = itemsData[existingItemIndex];
       alert(`O item "${existingItem.name}" já está na lista com o mesmo nome. Altere o nome para salvar.`);
     } else {
-      itemsData[editingItemIndex].name = newName;
-      itemsData[editingItemIndex].price = newPrice;
-      itemsData[editingItemIndex].quantity = newQuantity;
+      const editedItem = itemsData[editingItemIndex];
+      const changes = [];
+
+      if (editedItem.name !== newName) {
+        changes.push(`Nome: ${editedItem.name} => ${newName}`);
+        editedItem.name = newName;
+      }
+      if (editedItem.price !== newPrice) {
+        changes.push(`Preço Unitário: ${editedItem.price} => ${newPrice.toFixed(2)}`);
+        editedItem.price = newPrice;
+      }
+      if (editedItem.quantity !== newQuantity) {
+        changes.push(`Quantidade: ${editedItem.quantity} => ${newQuantity}`);
+        editedItem.quantity = newQuantity;
+      }
+
+      // Mostrar a mensagem de confirmação com os campos modificados
+      if (changes.length > 0) {
+        alert(`Campos modificados:\n${changes.join("\n")}`);
+      }
+
       editingItemIndex = -1;
       editingItemData = {};
-      saveItemsToLocalStorage(); // Salvar os itens no localStorage
+      saveItemsToLocalStorage();
       updateTable();
+      closeEditPanel();
     }
   }
 
-  updateTotal(); // Atualizar o campo de total
+  updateTotal();
 }
 
-// Função para remover um item
-function removeItem() {
+function deleteItem() {
   if (editingItemIndex !== -1) {
     const confirmed = confirm(`Deseja remover o item "${itemsData[editingItemIndex].name}" da lista de compras?`);
     if (confirmed) {
       itemsData.splice(editingItemIndex, 1);
       editingItemIndex = -1;
       editingItemData = {};
-      saveItemsToLocalStorage(); // Salvar os itens no localStorage
+      saveItemsToLocalStorage();
       updateTable();
+      closeEditPanel();
     }
   }
 
-  updateTotal(); // Atualizar o campo de total
+  updateTotal();
 }
+
 // ... Código JavaScript anterior ...
 
 // Função para salvar a tabela como PDF
@@ -234,5 +278,42 @@ sortableColumns.forEach(column => {
     sortItems(columnName);
   });
 });
-updateTable();
-updateTotal();
+function loadCSV() {
+  const fileInput = document.getElementById("csvFileInput");
+  const file = fileInput.files[0];
+
+  if (!file) {
+    alert("Por favor, selecione um arquivo CSV.");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const contents = e.target.result;
+    processDataFromCSV(contents);
+  };
+  reader.readAsText(file);
+}
+
+function processDataFromCSV(csvData) {
+  const lines = csvData.split("\n");
+  const newData = [];
+
+  for (const line of lines) {
+    const [name, price, quantity] = line.split(",");
+    if (name && !isNaN(price) && !isNaN(quantity)) {
+      const newItem = { name, price: parseFloat(price), quantity: parseFloat(quantity) };
+      newData.push(newItem);
+    }
+  }
+
+  // Atualizar a lista de compras com os novos dados
+  itemsData = newData;
+
+  // Salvar os novos dados no localStorage
+  saveItemsToLocalStorage();
+
+  // Atualizar a tabela e o total com os novos dados
+  updateTable();
+  updateTotal();
+}
