@@ -208,3 +208,67 @@ body {
   padding: 0.5%;
   border-radius: 30%;
 }
+
+/* Painel de edição
+/* Adicione esta classe para ocultar o painel de edição inicialmente */
+.hidden {
+  display: none;
+}
+
+/* Estilize o painel de edição */
+#edit-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffffe0;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Aplique os estilos do Material Design para os campos de texto */
+.mdc-text-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.mdc-text-field__input {
+  font-size: 16px;
+}
+
+.mdc-floating-label {
+  font-size: 16px;
+}
+
+.mdc-line-ripple::before,
+.mdc-line-ripple::after {
+  background-color: #006dea; /* Cor primária do Material Design (indigo-500) */
+}
+
+/* Aplique os estilos do Material Design para os botões */
+.mdc-button {
+  margin-right: 8px;
+}
+
+.mdc-button > #bt_edt {
+  position: relative;
+  display: inline-flex;
+  justify-content: space-around;
+  padding: 6px;
+  margin: 3px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: small;
+  align-items: center;
+  background-color: rgb(13, 128, 166);
+  color: #FFF;
+  border: none;
+  border-radius: 8px;
+  height: 30px;
+  line-height: 30px;
+  width: 100px;
+  cursor: pointer;
+}
+#bt_edt:hover {
+  box-shadow: 2px 4px 6px #000;
+}
