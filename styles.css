@@ -254,6 +254,7 @@ body {
   border: solid 6px #19232e77;
   border-radius: 14px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1500;
 }
 
 /* Aplique os estilos do Material Design para os campos de texto */
